@@ -1,0 +1,207 @@
+{% extends 'partials/_master.twig' %}
+
+
+
+
+{% block main %}
+
+
+
+{# Pages section #}
+
+<section class="section section-pages hero is-success is-bold" >
+
+    <div class="container" >
+        <h2 class="title">Ventas</h2>
+        <div class="columns">
+            {% setcontent paginas = 'paginas' earliest limit 16  %}
+            {% for pagina in paginas %}
+
+            {%  if 'Venta'in pagina.title   %}
+                <div class="column">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-3by2">
+                                {{ popup(pagina|image, 480, 320) }}
+                            </figure>
+                        </div>
+                        <div class="card-content content">
+                            <h3><a href="{{ pagina|link }}" class="is-success" style="font-size:14px; " >{{ pagina.titleshow }}</a></h3>
+                            
+                            <a class="button is-primary" href="{{ pagina|link }}">
+                                VER MAS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endif%}
+            {% else %}
+                <div class="column">
+                    <p>{{ __("general.phrase.no-content-found") }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-pages hero is-success is-bold" >
+
+    <div class="container">
+        <h2 class="title">Alquileres</h2>
+        <div class="columns">
+            {% setcontent paginas = 'paginas' earliest limit 16 %}
+            {% for pagina in paginas %}
+
+            {%  if 'Alquiler'in pagina.title   %}
+                <div class="column">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-3by2">
+                                {{ popup(pagina|image, 480, 320) }}
+                            </figure>
+                        </div>
+                        <div class="card-content content">
+                            <h3><a href="{{ pagina|link }}" class="is-success" style="font-size:14px;" >{{ pagina.titleshow }}</a></h3>
+                            
+                            <a class="button is-primary" href="{{ pagina|link }}">
+                                VER MAS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endif%}
+            {% else %}
+                <div class="column">
+                    <p>{{ __("general.phrase.no-content-found") }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{# ultimos inmuebles #}
+
+<section class="section section-latest-entries">
+    <div class="container">
+        <h2 class="title">Lo más reciente !</h2>
+        {% setcontent inmuebles = 'inmuebles' latest limit 10 %}
+        {% for inmueble in inmuebles %}
+
+            <article role="article" class="media columns">
+                <div class="column is-half">
+                    <div class="content">
+                        <h3><a href="{{ inmueble|link }}">{{ inmueble|title }}</a></h3>
+                        
+                        <p> <strong>ID:</strong> {{ inmueble.idinmueble }}</p>                        
+                        <p> <strong>Provincia:</strong> {{ inmueble.provincia }}</p>
+                        <p> <strong>Cantón:</strong> {{ inmueble.canton }}</p>
+                        <p> <strong>Precio:</strong> {{ inmueble.precio }} <strong>$</strong> </p>
+                        
+                        <p> <img align="bottom" src="/files/icons/m2Terreno.png" alt="" > <strong>m<sup>2</sup> de terreno:</strong> {{ inmueble.m2terreno}} </p>
+
+                        <p> <img align="bottom" src="/files/icons/m2Construccion.png" alt="" ><strong>m<sup>2</sup> de construcción:</strong> {{ inmueble.m2construccion }}</p>
+
+                        <p> <img align="bottom" src="/files/icons/dormitorio.png" alt="" ><strong>Número de dormitorios:</strong> {{ inmueble.numdormitorios }}</p>
+
+                        <p> <img align="bottom" src="/files/icons/bano.png" alt="" ><strong>Número de baños:</strong> {{ inmueble.numbanos }}</p>
+
+                        <p> <img align="bottom" src="/files/icons/garaje.png" alt="I" ><strong>Plazas de garaje:</strong> {{ inmueble.plazasgaraje }}</p>
+
+                        <p> <strong>Descripción:</strong><a href="{{ inmueble|link }}">....VER TODA LA INFORMACIÓN ...</a>  </p>
+
+                        <p> <strong>Agente asignado:</strong> {{ inmueble.agenteasignado}} </p>
+                        <p><strong>Contacto:</strong> {{inmueble.tlfagenteasignado}}  </p>
+
+
+                        <!--<p> <strong>Descripción:</strong> {{ inmueble.descripcion }} </p> -->                                                                               
+
+                        {#% include 'partials/_record_meta.twig' with {'extended': true, 'record': inmueble} %#}
+
+                    </div>
+                </div>
+                <div class="media-right column is-half " style="padding-right:0px; padding-left:0px" >
+                    <div class="swiper-container-inmueble swiper2" >
+                        
+                        <div class="swiper-wrapper ">
+                            {% for image in inmueble.imagenes %}           
+             
+                            <div class="swiper-slide" style="background-image:url({{image.path}}) ; " >                                           
+
+                            </div>
+                            {% endfor %}
+
+                            
+    
+                         </div>
+  
+  
+                          <!-- If we need pagination -->
+                          <div class="swiper-pagination"></div>
+                          <!-- If we need navigation buttons -->
+                          <div class="swiper-button-prev"></div>
+                          <div class="swiper-button-next"></div>
+  
+  
+                    
+
+                    <script>
+                            var swiper2 = new Swiper ('.swiper-container-inmueble', 
+                    { 
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                        speed:1000,      
+                        direction: 'horizontal',
+                        calculateHeight:true,
+                        autoHeight:true,
+                        navigation:
+
+                        {
+                          nextEl: '.swiper-button-next',
+                          prevEl: '.swiper-button-prev',
+                        },
+                        pagination: 
+                        {
+                            el: '.swiper-pagination',
+                            dynamicBullets: true,
+                        },
+                        
+                        keyboard: 
+                        {
+                            enabled: false,
+                            onlyInViewport: false,
+                        },
+                        mousewheel: 
+                        {
+                            invert: false,
+                        },
+                    
+                    loop: true,
+                    }); 
+                </script>
+                
+                
+    
+                </div>
+
+                <section>   
+                <div class="buttons has-addons is-rigth" style="position:relative;bottom: 0px;">
+                                <a class="button is-primary" href="{{ inmueble|link }}">Ver Inmueble </a>
+                </div>
+                 </section>
+
+                
+
+             </div>
+            </article>
+            {% else %}
+            <p>No se ha encontrado ningún contenido</p>
+        {% endfor %}
+        
+    </div>
+</section>
+
+{#% include "partials/_sub_recent_records.twig" %#}
+
+{% endblock main %}
