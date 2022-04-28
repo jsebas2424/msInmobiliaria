@@ -1,0 +1,174 @@
+{% extends 'partials/_master2.twig' %}
+
+{% block main %}
+
+<section class="section section-record"  style="margin-top: 100px;">
+
+   
+     <div class="columns is-centered" >
+
+       
+       <div class="swiper-container-inmuebleBig swiper3" >
+                        
+                        <div class="swiper-wrapper ">
+                            {% for image in inmueble.imagenes %}           
+             
+                            <div class="swiper-slide" style="background-image:url({{image.path}}) ; " >                                           
+
+                            </div>
+                            {% endfor %}
+
+                            
+    
+                         </div>
+  
+  
+                          <!-- If we need pagination -->
+                          <div class="swiper-pagination"></div>
+                          <!-- If we need navigation buttons -->
+                          <div class="swiper-button-prev"></div>
+                          <div class="swiper-button-next"></div>
+  
+  
+                    
+
+                    <script>
+                            var swiper3 = new Swiper ('.swiper-container-inmuebleBig', 
+                    { 
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                        speed:1000,      
+                        direction: 'horizontal',
+                        calculateHeight:true,
+
+                        navigation:
+
+                        {
+                          nextEl: '.swiper-button-next',
+                          prevEl: '.swiper-button-prev',
+                        },
+                        pagination: 
+                        {
+                            el: '.swiper-pagination',
+                            dynamicBullets: true,
+                        },
+                        
+                        keyboard: 
+                        {
+                            enabled: false,
+                            onlyInViewport: false,
+                        },
+                        mousewheel: 
+                        {
+                            invert: false,
+                        },
+                    autoplay: 
+                    {
+                      delay: 3000,
+                    },
+                    loop: true,
+                    }); 
+                 </script>
+               
+    
+            </div>
+            </div>
+  </section > <br> <br> 
+
+  <section class="section section-record" >
+
+  
+    <div class="columns is-centered" >
+   
+                  <article  class="content"> 
+                  <br> <br>     
+                  
+         <h3><a> {{ inmueble.titulo }}  </a></h3>
+                 <br> <br> 
+                        
+                 </article >
+
+    </div  >
+
+
+        <div class="columns is-centered" >
+            
+             <article  class="content">
+
+                <head>
+                    <style>
+                    table, th, td {
+                      
+                      padding: 5px;
+                      border-style: none;
+                      text-align: bottom;
+                    }
+                    
+                    </style>
+                </head>
+                
+
+                <table >
+                    <tbody>                       
+
+                        <tr>
+                             <td></td><td><strong>ID:</strong></td> <td> {{ inmueble.idinmueble }} </td>
+                        </tr>
+
+                        <tr>
+                            <td></td><td><strong>Provincia:</strong> </td> <td> {{ inmueble.provincia }} </td>
+                        </tr>
+
+                        <tr>
+                             <td></td><td><strong>Cantón:</strong></td> <td> {{ inmueble.canton }} </td>
+                        </tr>
+
+                        <tr>
+                             <td></td><td><strong>Precio:</strong></td> <td> {{ inmueble.precio }} <strong> $</strong> </td>
+                        </tr>
+
+                        <tr>
+                             <td><img src="/files/icons/m2Terreno.png" alt="" >  </td> <td> <strong>m<sup>2</sup> Terreno:</strong> </td> <td> {{ inmueble.m2terreno}} </td>
+                        </tr>
+
+                        <tr>
+                             <td><img src="/files/icons/m2Construccion.png" alt="" >  </td><td> <strong>m<sup>2</sup> Construcción:</strong> </td> <td> {{ inmueble.m2construccion }} </td>
+                        </tr>
+
+                        <tr>
+                             <td><img src="/files/icons/dormitorio.png" alt="" > </td> <td> <strong> Nº Dormitorios:</strong> </td> <td> {{ inmueble.numdormitorios }} </td>
+                        </tr>
+
+                        <tr>
+                             <td><img src="/files/icons/bano.png" alt="" > </td> <td> <strong> Nº Baños:</strong> </td> <td> {{ inmueble.numbanos }} </td>
+                        </tr>
+
+                        <tr>
+                             <td><img src="/files/icons/garaje.png" alt="" > </td> <td> <strong> Nº Plazas garaje:</strong> </td> <td> {{ inmueble.plazasgaraje }} </td>
+                        </tr>
+
+                        <tr>
+                             <td></td><td><strong>Descripción:</strong></td> <td> {{ inmueble.descripcion }}</td>
+                        </tr>
+
+                         <tr>
+                             <td></td><td><strong>Agente:</strong></td> <td> {{ inmueble.agenteasignado}} </td>
+                        </tr>
+
+                         <tr>
+                             <td></td><td><strong>Contacto:</strong></td> <td> {{inmueble.tlfagenteasignado}} </td>
+                        </tr>
+
+                    </tbody>
+                </table>                    
+                       
+            </article>
+
+
+        </div>
+   
+</section>
+
+
+
+{% endblock main %}
